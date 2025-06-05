@@ -45,7 +45,9 @@ python image_downloader.py
 > 此步驟流程皆在 kaggle 執行
 
 > 前處理所使用的原始圖片皆來自自行上傳至 Kaggle Dataset 的 downloaded_images_2024，具體執行步驟使用的程式碼來自資料夾 face_crop_and_filter.ipynb。
+
 > 如果是使用 .ipynb 請直接依照裡面的框框執行即可
+
 > 因 downloaded_images_2024 有違反 kaggle 的資料集設定無法轉為公用因此不附連結
 
 ### 使用套件安裝
