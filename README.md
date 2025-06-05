@@ -102,7 +102,7 @@ pip install -U diffusers[training]
 
 > 此步驟流程皆在 kaggle 執行
 
-> 使用的模型是 ddpm-PTTbeauty-64-v11-linear-80 這個 kaggle dataset 裡面中的 best_model也就是最好的資料
+> 使用的模型是 ddpm-PTTbeauty-64-v11-linear-80 這個 kaggle dataset 裡面中的 best_model也就是最好的資料，具體執行步驟使用的程式碼來自資料夾 train_diffusion_model.ipynb。 
 
 > 如果是使用 .ipynb 請直接依照裡面的框框執行即可（需要安裝的套件已在 kaggle 以及裡面的格子中）
 
@@ -120,5 +120,5 @@ pip install -q diffusers transformers accelerate torchvision safetensors
    - 推論步數：300（之前嘗試過100,1000，最後取時間含結果最佳）
 3. 生成與儲存圖像：使用 pipeline() 方法逐批生成圖像，儲存為 PNG 格式，並將記憶體手動釋放以節省空間。
 4. 壓縮並執行 FID 分數計算（助教提供的 FID 資料有一起上傳進行分數計算）
-5. 下載最後生成的結果
+5. 下載最後生成的結果，在目前的檔案中顯示的是名為 "generated_images_v11-linear-80-300steps" 資料夾。
 
