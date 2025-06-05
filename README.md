@@ -66,8 +66,13 @@ pip install face-crop-plus
 
 ## 模型訓練
 為了訓練生成模型，以 Diffusers 套件提供的 UNet 結構搭配 DDPM 方法進行。
+
+> 此步驟流程皆在 kaggle 執行
+
 > 使用訓練資料是前處理所產生的最終檔案 cropped_image_64_64_NO_BLURRY_Final，同樣也會上傳 kaggle 成為 dataset 名為 "cropped_image_64_64_NO_BLURRY_Final"，具體執行步驟使用的程式碼來自資料夾 train_diffusion_model.ipynb。
+
 > 如果是使用 .ipynb 請直接依照裡面的框框執行即可
+
 > kaggle 資料集連結：[cropped_image_64_64_NO_BLURRY_Final]https://kaggle.com/datasets/050bd49377c744f6948b7d7fd906db7f7abf54eb3161bc2b2230c512b571ac49
 
 ### 使用套件安裝
@@ -95,7 +100,10 @@ pip install -U diffusers[training]
 
 ## 圖片生成以及計算最終結果
 
+> 此步驟流程皆在 kaggle 執行
+
 > 使用的模型是 ddpm-PTTbeauty-64-v11-linear-80 這個 kaggle dataset 裡面中的 best_model也就是最好的資料
+
 > 如果是使用 .ipynb 請直接依照裡面的框框執行即可（需要安裝的套件已在 kaggle 以及裡面的格子中）
 
 ### 使用套件安裝
