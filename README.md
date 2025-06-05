@@ -18,3 +18,15 @@
 python ptt_crawler.py crawl
 python ptt_crawler.py image 0101 1231
 ```
+### 批次下載圖片
+- 檔案位置：scripts/image_downloader.py
+- 使用套件：aiohttp, aiofiles, asyncio, PIL, tqdm
+- 功能說明：
+  - 使用非同步方式（asyncio）並行下載圖片，加速處理流程
+  - 讀取前一步生成的圖片連結檔案（如：image_2024_0101_1231.json）
+  - 嘗試最多 3 次連線，每張圖片會自動以原始格式命名儲存於 ./output/downloaded_images_2024/ 資料夾中
+  - 若下載失敗，會記錄於 ./output/failed.txt
+- 執行指令：
+```python
+python image_downloader.py
+```
