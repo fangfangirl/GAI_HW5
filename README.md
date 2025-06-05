@@ -30,3 +30,23 @@ python ptt_crawler.py image 0101 1231
 ```python
 python image_downloader.py
 ```
+
+## 資料前處理（Face Cropping & 過濾模糊照）
+使用 face-crop-plus 進行臉部裁切與圖片品質過濾，並於 Kaggle Notebook 上執行，環境配有 NVIDIA P100 GPU。
+> 前處理所使用的原始圖片皆來自上傳至 Kaggle Dataset 的 downloaded_images_2024，具體執行步驟使用的程式碼來自資料夾 hw5-gai-face-crop-plus-0529-0604。
+
+### 使用套件安裝
+```bash
+pip install face-crop-plus
+```
+### 處理步驟（下面的資料夾名稱是根據在 kaggle 上執行放置）
+1. 初步臉部裁切（256x256）：將原始圖片中偵測到的臉部裁切為 256x256 的圖片，並保留於暫存資料夾`/kaggle/working/cropped_image_temp_256_256`中。
+2. 過濾模糊照片：定義模糊圖片為 Laplacian 變異數小於 100，過濾後的高品質圖片將複製到新的資料夾`/kaggle/working/cropped_image_temp_NO_BLURRY`中。
+3. 最終臉部裁切（64x64）：針對非模糊圖片再次裁切臉部，尺寸縮小為 64x64，並輸出為訓練用資料集`/kaggle/working/cropped_image_64_64_NO_BLURRY_Final`。
+4. 補充：壓縮處理後圖片：以便更好的放置到 kaggle 上的 dataset 當中
+   ```bash
+   !zip -rq /kaggle/working/cropped_image_64_64_NO_BLURRY_Final.zip /kaggle/working/cropped_image_64_64_NO_BLURRY_Final
+   ```
+5. 放到 kaggle 上的 dataset
+
+### 步驟使用的檔案為資料夾中的 hw5-gai-face-crop-plus-0529-0604
