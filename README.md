@@ -2,6 +2,14 @@
 
 ## 資料蒐集（爬蟲說明）
 在裡面主要蒐集的2024年的所有圖片為訓練資料，透過兩支 Python 程式分別進行文章蒐集與圖片下載，具體流程如下：
+> 此步驟流程皆在本地端電腦執行
+
+### 本地端環境設置
+使用資料中附的 requirement.txt
+```python
+pip install -r requirements.txt
+```
+在開始進行資料爬蟲之前請先在放置爬蟲py檔案的資料夾下新增一個 output 以免資料無法儲存。
 
 ### 爬取文章資訊與圖片連結
 - 檔案位置：scripts/ptt_crawler.py
@@ -34,6 +42,8 @@ python image_downloader.py
 ## 資料前處理（Face Cropping & 過濾模糊照）
 使用 face-crop-plus 進行臉部裁切與圖片品質過濾，並於 Kaggle Notebook 上執行，環境配有 NVIDIA P100 GPU。
 > 前處理所使用的原始圖片皆來自自行上傳至 Kaggle Dataset 的 downloaded_images_2024，具體執行步驟使用的程式碼來自資料夾 face_crop_and_filter.ipynb。
+> 如果是使用 .ipynb 請直接依照裡面的框框執行即可
+> 因 downloaded_images_2024 有違反 kaggle 的資料集設定無法轉為公用因此不附連結
 
 ### 使用套件安裝
 ```bash
@@ -47,11 +57,13 @@ pip install face-crop-plus
 ```bash
    zip -rq /kaggle/working/cropped_image_64_64_NO_BLURRY_Final.zip /kaggle/working/cropped_image_64_64_NO_BLURRY_Final
 ```
-5. 放到 kaggle 上的 dataset
+5. 放到 kaggle 上的 dataset，我這邊是將它放在 cropped_image_64_64_NO_BLURRY_Final 當中。
 
 ## 模型訓練
 為了訓練生成模型，以 Diffusers 套件提供的 UNet 結構搭配 DDPM 方法進行。
 > 使用訓練資料是前處理所產生的最終檔案 cropped_image_64_64_NO_BLURRY_Final，同樣也會上傳 kaggle 成為 dataset 名為 "cropped_image_64_64_NO_BLURRY_Final"，具體執行步驟使用的程式碼來自資料夾 train_diffusion_model.ipynb。
+> 如果是使用 .ipynb 請直接依照裡面的框框執行即可
+> kaggle 資料集連結：[cropped_image_64_64_NO_BLURRY_Final]https://kaggle.com/datasets/050bd49377c744f6948b7d7fd906db7f7abf54eb3161bc2b2230c512b571ac49
 
 ### 使用套件安裝
 ```bash
@@ -77,6 +89,9 @@ pip install -U diffusers[training]
 4. 結果最後會生成在 ddpm-PTTbeauty-64-v11-linear-80 中，同樣會進行下載並重新成為一個 kaggle 上的 dataset
 
 ## 圖片生成以及計算最終結果
+
+> 使用的模型是 ddpm-PTTbeauty-64-v11-linear-80 這個 kaggle dataset 裡面中的 best_model也就是最好的資料
+> 如果是使用 .ipynb 請直接依照裡面的框框執行即可（需要安裝的套件已在 kaggle 以及裡面的格子中）
 
 ### 使用套件安裝
 ```bash
