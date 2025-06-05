@@ -8,7 +8,7 @@ from io import BytesIO
 from tqdm.asyncio import tqdm_asyncio
 
 TARGET = 2024
-save_dir = f"./downloaded_images_{TARGET}"
+save_dir = f"./output/downloaded_images_{TARGET}"
 os.makedirs(save_dir, exist_ok=True)
 
 MAX_CONCURRENT_DOWNLOADS = 20
@@ -67,7 +67,7 @@ async def main():
 
     # 寫入失敗的 URL 到 failed.txt
     if failed_urls:
-        async with aiofiles.open("failed.txt", "w", encoding="utf-8") as f:
+        async with aiofiles.open("./output/failed.txt", "w", encoding="utf-8") as f:
             await f.write("\n".join(failed_urls))
         print(f"\n 有 {len(failed_urls)} 張圖片下載失敗，已儲存至 failed.txt")
 
