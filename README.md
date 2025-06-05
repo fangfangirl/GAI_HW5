@@ -9,7 +9,7 @@
 ```python
 pip install -r requirements.txt
 ```
-在開始進行資料爬蟲之前請先在放置爬蟲py檔案的資料夾下新增一個 output 以免資料無法儲存。
+> 在開始進行資料爬蟲之前請先在放置爬蟲py檔案的資料夾下新增一個 output 以免資料無法儲存。
 
 ### 爬取文章資訊與圖片連結
 - 檔案位置：scripts/ptt_crawler.py
