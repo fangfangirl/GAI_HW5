@@ -44,9 +44,9 @@ pip install face-crop-plus
 2. 過濾模糊照片：定義模糊圖片為 Laplacian 變異數小於 100，過濾後的高品質圖片將複製到新的資料夾`/kaggle/working/cropped_image_temp_NO_BLURRY`中。
 3. 最終臉部裁切（64x64）：針對非模糊圖片再次裁切臉部，尺寸縮小為 64x64，並輸出為訓練用資料集`/kaggle/working/cropped_image_64_64_NO_BLURRY_Final`。
 4. 補充：壓縮處理後圖片：以便更好的放置到 kaggle 上的 dataset 當中
-   ```bash
+```bash
    !zip -rq /kaggle/working/cropped_image_64_64_NO_BLURRY_Final.zip /kaggle/working/cropped_image_64_64_NO_BLURRY_Final
-   ```
+```
 5. 放到 kaggle 上的 dataset
 
 ### 步驟使用的檔案為資料夾中的 hw5-gai-face-crop-plus-0529-0604
