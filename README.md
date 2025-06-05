@@ -33,7 +33,7 @@ python image_downloader.py
 
 ## 資料前處理（Face Cropping & 過濾模糊照）
 使用 face-crop-plus 進行臉部裁切與圖片品質過濾，並於 Kaggle Notebook 上執行，環境配有 NVIDIA P100 GPU。
-> 前處理所使用的原始圖片皆來自上傳至 Kaggle Dataset 的 downloaded_images_2024，具體執行步驟使用的程式碼來自資料夾 face_crop_and_filter.ipynb。
+> 前處理所使用的原始圖片皆來自自行上傳至 Kaggle Dataset 的 downloaded_images_2024，具體執行步驟使用的程式碼來自資料夾 face_crop_and_filter.ipynb。
 
 ### 使用套件安裝
 ```bash
@@ -45,8 +45,51 @@ pip install face-crop-plus
 3. 最終臉部裁切（64x64）：針對非模糊圖片再次裁切臉部，尺寸縮小為 64x64，並輸出為訓練用資料集`/kaggle/working/cropped_image_64_64_NO_BLURRY_Final`。
 4. 補充：壓縮處理後圖片：以便更好的放置到 kaggle 上的 dataset 當中
 ```bash
-   !zip -rq /kaggle/working/cropped_image_64_64_NO_BLURRY_Final.zip /kaggle/working/cropped_image_64_64_NO_BLURRY_Final
+   zip -rq /kaggle/working/cropped_image_64_64_NO_BLURRY_Final.zip /kaggle/working/cropped_image_64_64_NO_BLURRY_Final
 ```
 5. 放到 kaggle 上的 dataset
 
-### 步驟使用的檔案為資料夾中的 hw5-gai-face-crop-plus-0529-0604
+## 模型訓練
+為了訓練生成模型，以 Diffusers 套件提供的 UNet 結構搭配 DDPM 方法進行。
+> 使用訓練資料是前處理所產生的最終檔案 cropped_image_64_64_NO_BLURRY_Final，同樣也會上傳 kaggle 成為 dataset 名為 "cropped_image_64_64_NO_BLURRY_Final"，具體執行步驟使用的程式碼來自資料夾 train_diffusion_model.ipynb。
+
+### 使用套件安裝
+```bash
+pip install -U diffusers[training]
+```
+### 訓練過程的敘述
+1. 使用 1000 steps 去增加噪音
+2. 曾經嘗試果使用cosine以及linear的方式，最後選擇linear的方式，因其表現最佳。
+3. 訓練的參數
+```
+    image_size = 64  # the generated image resolution
+    train_batch_size = 16 # 越小訓練結果越佳
+    eval_batch_size = 16  # how many images to sample during evaluation
+    num_epochs = 73 # 因 kaggle 時間的上限 12hr 這個是他的上限可以訓練的 epoch
+    gradient_accumulation_steps = 1
+    learning_rate = 1e-4
+    lr_warmup_steps = 500
+    save_image_epochs = 10 # 每 10 epoch 會透過 DDPM pipeline 隨機生成圖片並儲存，供後續比較訓練過程中的生成品質
+    save_model_epochs = 10 # 每訓練十個會儲存一次模型，同時每一個 Epoch 都會判別他是否為最好的模型（以 epoch loss 最低為最好）
+    mixed_precision = "fp16"
+    output_dir = "ddpm-PTTbeauty-64-v11-linear-80"
+```
+4. 結果最後會生成在 ddpm-PTTbeauty-64-v11-linear-80 中，同樣會進行下載並重新成為一個 kaggle 上的 dataset
+
+## 圖片生成以及計算最終結果
+### 使用套件安裝
+```bash
+pip install -q diffusers transformers accelerate torchvision safetensors
+```
+### 處理步驟（以下資料夾名稱與路徑為 Kaggle 上使用時的實際配置）
+1. 設定模型與輸出資料夾：指定上一個步驟的 dataset 已訓練好的 DDPM 模型路徑（/kaggle/input/ddpm-PTTbeauty-64-v11-linear-80/best_model）及輸出生成圖像的資料夾。
+2. 載入 DDPM Pipeline
+   - 使用 DDPMPipeline 載入訓練好的模型，並配置生成參數
+   - 生成張數：10,000 張
+   - 批次大小：32
+   - 每張圖大小：64x64
+   - 推論步數：300（之前嘗試過100,1000，最後取時間含結果最佳）
+3. 生成與儲存圖像：使用 pipeline() 方法逐批生成圖像，儲存為 PNG 格式，並將記憶體手動釋放以節省空間。
+4. 壓縮並執行 FID 分數計算（助教提供的 FID 資料有一起上傳進行分數計算）
+5. 下載最後生成的結果
+
