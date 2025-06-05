@@ -73,7 +73,7 @@ pip install face-crop-plus
 
 > 如果是使用 .ipynb 請直接依照裡面的框框執行即可（需要安裝的套件已在 kaggle 以及裡面的格子中）
 
-> kaggle 資料集連結：[cropped_image_64_64_NO_BLURRY_Final]https://kaggle.com/datasets/050bd49377c744f6948b7d7fd906db7f7abf54eb3161bc2b2230c512b571ac49
+> kaggle 資料集連結 (private)：[cropped_image_64_64_NO_BLURRY_Final]https://kaggle.com/datasets/050bd49377c744f6948b7d7fd906db7f7abf54eb3161bc2b2230c512b571ac49
 
 ### 使用套件安裝
 ```bash
@@ -106,6 +106,7 @@ pip install -U diffusers[training]
 
 > 如果是使用 .ipynb 請直接依照裡面的框框執行即可（需要安裝的套件已在 kaggle 以及裡面的格子中）
 
+> 模型資料庫的連結 (private)：[ddpm-PTTbeauty-64-v11-linear-80]https://kaggle.com/datasets/804aaff44c78e1338ac23fe4fcc85cf9aad490ed2d22432a583a029cb52c7aa9
 ### 使用套件安裝
 ```bash
 pip install -q diffusers transformers accelerate torchvision safetensors
