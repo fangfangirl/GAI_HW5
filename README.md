@@ -33,7 +33,7 @@ python image_downloader.py
 
 ## 資料前處理（Face Cropping & 過濾模糊照）
 使用 face-crop-plus 進行臉部裁切與圖片品質過濾，並於 Kaggle Notebook 上執行，環境配有 NVIDIA P100 GPU。
-> 前處理所使用的原始圖片皆來自上傳至 Kaggle Dataset 的 downloaded_images_2024，具體執行步驟使用的程式碼來自資料夾 hw5-gai-face-crop-plus-0529-0604。
+> 前處理所使用的原始圖片皆來自上傳至 Kaggle Dataset 的 downloaded_images_2024，具體執行步驟使用的程式碼來自資料夾 face_crop_and_filter.ipynb。
 
 ### 使用套件安裝
 ```bash
