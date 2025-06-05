@@ -46,7 +46,7 @@ python image_downloader.py
 
 > 前處理所使用的原始圖片皆來自自行上傳至 Kaggle Dataset 的 downloaded_images_2024，具體執行步驟使用的程式碼來自資料夾 face_crop_and_filter.ipynb。
 
-> 如果是使用 .ipynb 請直接依照裡面的框框執行即可
+> 如果是使用 .ipynb 請直接依照裡面的框框執行即可（需要安裝的套件已在 kaggle 以及裡面的格子中）
 
 > 因 downloaded_images_2024 有違反 kaggle 的資料集設定無法轉為公用因此不附連結
 
@@ -71,7 +71,7 @@ pip install face-crop-plus
 
 > 使用訓練資料是前處理所產生的最終檔案 cropped_image_64_64_NO_BLURRY_Final，同樣也會上傳 kaggle 成為 dataset 名為 "cropped_image_64_64_NO_BLURRY_Final"，具體執行步驟使用的程式碼來自資料夾 train_diffusion_model.ipynb。
 
-> 如果是使用 .ipynb 請直接依照裡面的框框執行即可
+> 如果是使用 .ipynb 請直接依照裡面的框框執行即可（需要安裝的套件已在 kaggle 以及裡面的格子中）
 
 > kaggle 資料集連結：[cropped_image_64_64_NO_BLURRY_Final]https://kaggle.com/datasets/050bd49377c744f6948b7d7fd906db7f7abf54eb3161bc2b2230c512b571ac49
 
