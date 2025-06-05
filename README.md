@@ -77,6 +77,7 @@ pip install -U diffusers[training]
 4. 結果最後會生成在 ddpm-PTTbeauty-64-v11-linear-80 中，同樣會進行下載並重新成為一個 kaggle 上的 dataset
 
 ## 圖片生成以及計算最終結果
+
 ### 使用套件安裝
 ```bash
 pip install -q diffusers transformers accelerate torchvision safetensors
